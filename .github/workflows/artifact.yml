@@ -1,11 +1,10 @@
-name: Workflow Demo
+name: Workflow Artifact 
 
-on: [push]
+on: push
 
 jobs:
   build:
     runs-on: ubuntu-latest
-
     steps:
     - name: Checkout code
       uses: actions/checkout@v4
@@ -21,9 +20,9 @@ jobs:
 
   download:
     runs-on: ubuntu-latest
-    needs: build
+    needs: build #depenedent job
     steps:
-      - name: Download text file
+      - name: Download text file and save to artifacts directory
         uses: actions/download-artifact@v5
         with:
           name: hello-artifact

@@ -1,4 +1,4 @@
-name: First Job
+name: Multiline commad execution
 
 on: push
 
@@ -9,8 +9,8 @@ jobs:
             - name: Checkout Repo
               uses: actions/checkout@v6  
 
-            - name: Welcome message
+            - name: Multiline commad execution
               run:  |
-                echo "My first github actions job"
+                echo "Multiline commad execution job"
                 ls -ltra
                 cat README.md
