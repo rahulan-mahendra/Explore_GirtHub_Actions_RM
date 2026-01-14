@@ -1,6 +1,7 @@
-name: Exploring Variables and Secrets
+name: Exploring concurrency
 
-on: push
+on: 
+  workflow_dispatch:
 
 env:
     CONTAINER_REGISTRY: docker.io
@@ -18,3 +19,12 @@ jobs:
 
     - name: Docker Publish
       run: echo docker push $CONTAINER_REGISTRY/${{ vars.DOCKER_USERNAME }}/$IMAGE_NAME:latest
+
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+    - name: Docker Run
+      timeout-minutes: 1
+      run: |
+        echo docker run -d -p 8080:80 $CONTAINER_REGISTRY/${{ vars.DOCKER_USERNAME }}/$IMAGE_NAME:latest
+        sleep 600s
